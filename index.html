@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mi Web App</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="imagen" type="image/png">
+  <!-- Referencia al ícono correctamente -->
+  <link rel="icon" href="imagen.png" type="image/png">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -46,7 +46,7 @@
         const dateList = JSON.parse(storedDates);
         const listElement = document.getElementById('dateList');
         listElement.innerHTML = ''; // Limpiar la lista
-        dateList.reverse().forEach(dateTime => { // Mostrar las más recientes primero
+        dateList.reverse().forEach(dateTime => { // Mostrar más recientes primero
           const listItem = document.createElement('li');
           listItem.textContent = dateTime;
           listElement.appendChild(listItem);
