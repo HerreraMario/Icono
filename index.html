@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guardar Fecha y Hora</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registro de Fecha y Hora</h1>
+  <button id="saveDateTime">Guardar Fecha y Hora</button>
+  <ul id="dateList"></ul>
+  
+  <script>
+    // Función para cargar las fechas almacenadas
+    function loadStoredDates() {
+      const storedDates = localStorage.getItem('savedDates');
+      if (storedDates) {
+        const dateList = JSON.parse(storedDates);
+        const listElement = document.getElementById('dateList');
+        listElement.innerHTML = ''; // Limpiar la lista
+        dateList.forEach(dateTime => {
+          const listItem = document.createElement('li');
+          listItem.textContent = dateTime;
+          listElement.appendChild(listItem);
+        });
+      }
+    }
+
+    // Guardar la nueva fecha y actualizar LocalStorage
+    document.getElementById('saveDateTime').addEventListener('click', function() {
+      const now = new Date();
+      const dateTime = `Fecha: ${now.toLocaleDateString()} Hora: ${now.toLocaleTimeString()}`;
+      
+      // Mostrar en la lista
+      const listElement = document.getElementById('dateList');
+      const listItem = document.createElement('li');
+      listItem.textContent = dateTime;
+      listElement.appendChild(listItem);
+
+      // Guardar en LocalStorage
+      const storedDates = localStorage.getItem('savedDates');
+      const dateList = storedDates ? JSON.parse(storedDates) : [];
+      dateList.push(dateTime);
+      localStorage.setItem('savedDates', JSON.stringify(dateList));
+    });
+
+    // Cargar las fechas al cargar la página
+    window.onload = loadStoredDates;
+  </script>
+</body>
+</html>
